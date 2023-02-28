@@ -1,12 +1,17 @@
 import React, { useReducer } from 'react';
 import reducer from '../reducers';
 import { initialState } from '../reducers';
-import { addOne, applyNumber, changeOperation, clearDisplay } from '../actions';
-
 import './App.css';
-
 import TotalDisplay from './TotalDisplay';
 import CalcButton from './CalcButton';
+
+import { 
+  addOne, 
+  applyNumber, 
+  changeOperation, 
+  clearDisplay, 
+  memoryPlus 
+} from '../actions';
 
 function App() {
 
@@ -28,6 +33,10 @@ function App() {
     dispatch(clearDisplay())
   }
 
+  const memoryPlusHandler = (num) => {
+    dispatch(memoryPlus(num))
+  }
+
   return (
     <div className="App">
       <nav className="navbar navbar-dark bg-dark">
@@ -45,7 +54,7 @@ function App() {
             </div>
             
             <div className="row">
-              <CalcButton value={"M+"}/>
+              <CalcButton value={"M+"} onClick={() => {memoryPlusHandler(state.total)}}/>
               <CalcButton value={"MR"}/>
               <CalcButton value={"MC"}/>
             </div>
